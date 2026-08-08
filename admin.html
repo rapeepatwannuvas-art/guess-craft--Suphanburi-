@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบจัดการหลังบ้าน | Just Trips Backoffice</title>
+    <title>ระบบจัดการหลังบ้าน | Guess Craft Backoffice</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         :root {
-            --admin-primary: #1e293b;
-            --admin-secondary: #3b82f6;
+            --admin-primary: #0f172a;       /* Midnight Navy */
+            --admin-secondary: #d97706;     /* Craft Gold */
+            --admin-secondary-hover: #b45309; /* Hover Gold */
             --admin-bg: #f8fafc;
             --admin-card: #ffffff;
             --admin-text: #334155;
@@ -41,7 +42,8 @@
         }
 
         .sidebar-footer { padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
-        .btn-logout { color: #ef4444; text-decoration: none; font-size: 14px; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .btn-logout { color: #ef4444; text-decoration: none; font-size: 14px; display: flex; align-items: center; gap: 10px; cursor: pointer; transition: color 0.2s; }
+        .btn-logout:hover { color: #f87171; }
 
         .main-content { flex: 1; width: calc(100% - 260px); display: flex; flex-direction: column; overflow-y: auto; }
         .topbar { background-color: var(--admin-card); min-height: 70px; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
@@ -50,7 +52,7 @@
         .user-info { text-align: right; }
         .user-name { font-size: 14px; font-weight: 600; color: #0f172a; }
         .user-role { font-size: 11px; color: #10b981; }
-        .avatar { width: 40px; height: 40px; background-color: #dbeafe; color: var(--admin-secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .avatar { width: 40px; height: 40px; background-color: rgba(217, 119, 6, 0.15); color: var(--admin-secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; }
 
         .content-wrapper { padding: 30px; max-width: 1200px; margin: 0 auto; width: 100%; }
 
@@ -79,7 +81,7 @@
 
         .btn { padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; text-decoration: none; display: inline-block; transition: 0.2s; }
         .btn-primary { background-color: var(--admin-secondary); color: #fff; }
-        .btn-primary:hover { background-color: #2563eb; }
+        .btn-primary:hover { background-color: var(--admin-secondary-hover); }
         .btn-export { background-color: #10b981; color: #fff; }
         .btn-export:hover { background-color: #059669; }
 
@@ -103,7 +105,7 @@
         .lead-company { font-weight: 600; color: #0f172a; margin-bottom: 3px; font-size: 14px; }
         .lead-contact { font-size: 12px; color: #64748b; }
         .lead-date { font-size: 12px; color: #94a3b8; }
-        .req-highlight { display: inline-block; background-color: #eff6ff; color: var(--admin-secondary); padding: 3px 8px; border-radius: 4px; font-size: 12px; font-weight: 500; margin-bottom: 5px; }
+        .req-highlight { display: inline-block; background-color: rgba(217, 119, 6, 0.1); color: var(--admin-secondary); padding: 3px 8px; border-radius: 4px; font-size: 12px; font-weight: 500; margin-bottom: 5px; }
 
         /* Badges & Actions */
         .status-badge { padding: 4px 10px; border-radius: 50px; font-size: 11px; font-weight: 600; display: inline-block; }
@@ -111,7 +113,7 @@
         .status-draft { background-color: #f1f5f9; color: #475569; }
         .status-new { background-color: #fee2e2; color: #b91c1c; padding: 5px 12px; font-size: 12px; }
         .status-contacted { background-color: #fef3c7; color: #b45309; padding: 5px 12px; font-size: 12px; }
-        .status-quoted { background-color: #dbeafe; color: #1d4ed8; padding: 5px 12px; font-size: 12px; }
+        .status-quoted { background-color: rgba(15, 23, 42, 0.1); color: var(--admin-primary); padding: 5px 12px; font-size: 12px; }
 
         .action-links a { color: var(--admin-secondary); text-decoration: none; font-weight: 500; font-size: 13px; margin-right: 10px; }
         .action-links a:hover { text-decoration: underline; }
@@ -128,11 +130,13 @@
         .form-group { display: flex; flex-direction: column; gap: 8px; }
         .full-width { grid-column: span 2; }
         .form-group label { font-size: 13px; font-weight: 500; color: #475569; }
-        .form-group input, .form-group select, .form-group textarea { padding: 12px 15px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; outline: none; font-family: 'Kanit', sans-serif; }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--admin-secondary); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+        .form-group input, .form-group select, .form-group textarea { padding: 12px 15px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; outline: none; font-family: 'Kanit', sans-serif; transition: 0.3s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--admin-secondary); box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15); }
         .action-bar { display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px; }
-        .btn-cancel { background-color: #f1f5f9; color: #475569; padding: 10px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; }
-        .btn-save { background-color: var(--admin-secondary); color: #fff; padding: 10px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; }
+        .btn-cancel { background-color: #f1f5f9; color: #475569; padding: 10px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; transition: 0.3s; }
+        .btn-cancel:hover { background-color: #e2e8f0; }
+        .btn-save { background-color: var(--admin-secondary); color: #fff; padding: 10px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; transition: 0.3s; }
+        .btn-save:hover { background-color: var(--admin-secondary-hover); }
 
     </style>
 </head>
@@ -141,7 +145,7 @@
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="sidebar-header">
-            <h2>Just Trips</h2>
+            <h2>Guess Craft</h2>
             <p>Backoffice System</p>
         </div>
         <ul class="sidebar-menu">
@@ -167,10 +171,10 @@
             <div class="topbar-title" id="pageTitle">ภาพรวมระบบ (Executive Dashboard)</div>
             <div class="user-profile">
                 <div class="user-info">
-                    <div class="user-name">Just Trips Admin</div>
+                    <div class="user-name">Guess Craft Admin</div>
                     <div class="user-role">● OWNER</div>
                 </div>
-                <div class="avatar">J</div>
+                <div class="avatar">G</div>
             </div>
         </header>
 
@@ -253,51 +257,51 @@
                             <tr>
                                 <td>
                                     <div class="pkg-info">
+                                        <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=150" alt="Japan" class="pkg-img">
+                                        <div>
+                                            <div class="pkg-name">Japan Executive & Innovation</div>
+                                            <div class="pkg-meta">📍 เอเชีย (โตเกียว, ญี่ปุ่น)</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>5 วัน 3 คืน</td>
+                                <td>฿35,900</td>
+                                <td><span class="status-badge status-active">ออนไลน์</span></td>
+                                <td class="action-links">
+                                    <a href="#" onclick="switchTab('add-package')">แก้ไข</a>
+                                    <a href="#" class="text-danger">ลบ</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="pkg-info">
+                                        <img src="https://images.unsplash.com/photo-1522814147043-f16ce6166133?w=150" alt="Europe" class="pkg-img">
+                                        <div>
+                                            <div class="pkg-name">Europe Premium Leadership</div>
+                                            <div class="pkg-meta">📍 ยุโรป (สวิส - ฝรั่งเศส)</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>7 วัน 5 คืน</td>
+                                <td>฿89,000</td>
+                                <td><span class="status-badge status-active">ออนไลน์</span></td>
+                                <td class="action-links">
+                                    <a href="#" onclick="switchTab('add-package')">แก้ไข</a>
+                                    <a href="#" class="text-danger">ลบ</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="pkg-info">
                                         <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=150" alt="Phuket" class="pkg-img">
                                         <div>
-                                            <div class="pkg-name">Phuket Exclusive Outing</div>
-                                            <div class="pkg-meta">📍 ภาคใต้ (ภูเก็ต)</div>
+                                            <div class="pkg-name">Phuket Corporate Seminar</div>
+                                            <div class="pkg-meta">📍 ในประเทศ (ภูเก็ต)</div>
                                         </div>
                                     </div>
                                 </td>
                                 <td>3 วัน 2 คืน</td>
-                                <td>฿6,900</td>
-                                <td><span class="status-badge status-active">ออนไลน์</span></td>
-                                <td class="action-links">
-                                    <a href="#" onclick="switchTab('add-package')">แก้ไข</a>
-                                    <a href="#" class="text-danger">ลบ</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="pkg-info">
-                                        <img src="https://images.unsplash.com/photo-1588887640428-fb457a4a2cb5?w=150" alt="Chiang Mai" class="pkg-img">
-                                        <div>
-                                            <div class="pkg-name">Chiang Mai Seminar & Culture</div>
-                                            <div class="pkg-meta">📍 ภาคเหนือ (เชียงใหม่)</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>3 วัน 2 คืน</td>
-                                <td>฿5,500</td>
-                                <td><span class="status-badge status-active">ออนไลน์</span></td>
-                                <td class="action-links">
-                                    <a href="#" onclick="switchTab('add-package')">แก้ไข</a>
-                                    <a href="#" class="text-danger">ลบ</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="pkg-info">
-                                        <img src="https://images.unsplash.com/photo-1581337204873-ef36aa186caa?w=150" alt="Kanchanaburi" class="pkg-img">
-                                        <div>
-                                            <div class="pkg-name">Kanchanaburi Nature & CSR</div>
-                                            <div class="pkg-meta">📍 ภาคกลาง (กาญจนบุรี)</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>2 วัน 1 คืน</td>
-                                <td>฿2,900</td>
+                                <td>฿8,900</td>
                                 <td><span class="status-badge status-draft">ฉบับร่าง</span></td>
                                 <td class="action-links">
                                     <a href="#" onclick="switchTab('add-package')">แก้ไข</a>
@@ -321,39 +325,38 @@
                         <div class="form-body form-grid">
                             <div class="form-group full-width">
                                 <label>ชื่อแพ็คเกจทัวร์ (Tour Title) <span style="color:red;">*</span></label>
-                                <input type="text" placeholder="เช่น Phuket Exclusive Outing ภูเก็ต 3 วัน 2 คืน">
+                                <input type="text" placeholder="เช่น Japan Executive & Innovation">
                             </div>
                             <div class="form-group">
                                 <label>ภูมิภาค (Region)</label>
                                 <select>
                                     <option>-- เลือกภูมิภาค --</option>
-                                    <option value="north">ภาคเหนือ</option>
-                                    <option value="south">ภาคใต้</option>
-                                    <option value="east">ภาคตะวันออก</option>
-                                    <option value="central">ภาคกลาง</option>
+                                    <option value="asia">เอเชีย (Asia)</option>
+                                    <option value="europe">ยุโรป (Europe)</option>
+                                    <option value="domestic">ในประเทศ (Domestic)</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>ระยะเวลา (Duration)</label>
                                 <select>
                                     <option>-- เลือกระยะเวลา --</option>
-                                    <option value="2d1n">2 วัน 1 คืน</option>
                                     <option value="3d2n">3 วัน 2 คืน</option>
-                                    <option value="4d3n">4 วัน 3 คืน</option>
+                                    <option value="5d3n">5 วัน 3 คืน</option>
+                                    <option value="6d4n">6 วัน 4 คืน ขึ้นไป</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>ระดับราคา (Budget Level)</label>
                                 <select>
                                     <option>-- เลือกระดับราคา --</option>
-                                    <option value="budget1">ไม่เกิน 3,000 บาท</option>
-                                    <option value="budget2">3,001 - 5,000 บาท</option>
-                                    <option value="budget3">5,000 บาท ขึ้นไป</option>
+                                    <option value="budget1">ไม่เกิน 15,000 บาท</option>
+                                    <option value="budget2">15,001 - 35,000 บาท</option>
+                                    <option value="budget3">35,000 บาท ขึ้นไป</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>ราคาเริ่มต้น (Starting Price)</label>
-                                <input type="number" placeholder="เช่น 6900">
+                                <input type="number" placeholder="เช่น 35900">
                             </div>
                         </div>
                     </div>
@@ -363,11 +366,11 @@
                         <div class="form-body form-grid">
                             <div class="form-group full-width">
                                 <label>ป้ายกำกับ (Badge / Tag)</label>
-                                <input type="text" placeholder="เช่น ยอดนิยม, คุ้มค่า (ถ้าไม่ใส่จะไม่มีป้ายแสดง)">
+                                <input type="text" placeholder="เช่น VIP Exclusive, Incentive Trip (ถ้าไม่ใส่จะไม่มีป้ายแสดง)">
                             </div>
                             <div class="form-group full-width">
                                 <label>จุดเด่นของแพ็คเกจ (Highlights) - พิมพ์ 1 ข้อต่อ 1 บรรทัด</label>
-                                <textarea rows="4" placeholder="พักรีสอร์ท 4 ดาว ติดหาดป่าตอง&#10;ล่องเรือคาตามารัน ชมพระอาทิตย์ตก&#10;งานเลี้ยง Seafood BBQ ริมทะเล"></textarea>
+                                <textarea rows="4" placeholder="ศึกษาดูงานนวัตกรรมที่ศูนย์จัดแสดงเทคโนโลยีชั้นนำ&#10;พักโรงแรมระดับ 4 ดาวใจกลางชินจูกุ&#10;งานกาล่าดินเนอร์ และแช่ออนเซ็นส่วนตัว"></textarea>
                             </div>
                         </div>
                     </div>
@@ -449,10 +452,10 @@
                                     <div class="lead-contact">คุณสมชาย (081-234-5678)</div>
                                 </td>
                                 <td>
-                                    <span class="req-highlight">📍 ภูเก็ต</span> <span class="req-highlight">👥 50 ท่าน</span>
-                                    <div style="font-size: 13px; color: #64748b; margin-top: 5px;">ต้องการสัมมนา 3 วัน 2 คืน พักโรงแรม 4 ดาว เน้นกิจกรรม Team Building</div>
+                                    <span class="req-highlight">📍 ยุโรป</span> <span class="req-highlight">👥 50 ท่าน</span>
+                                    <div style="font-size: 13px; color: #64748b; margin-top: 5px;">ต้องการสัมมนา 5 วัน 3 คืน พักโรงแรม 4 ดาว เน้นสถานที่ดูงานชั้นนำ</div>
                                 </td>
-                                <td style="font-weight: 500; color: #0f172a;">฿6,000/ท่าน</td>
+                                <td style="font-weight: 500; color: #0f172a;">฿60,000/ท่าน</td>
                                 <td><span class="status-badge status-new">🆕 รอดำเนินการ</span></td>
                                 <td class="action-links">
                                     <span class="action-icon" title="ดูรายละเอียด">👁️</span>
@@ -469,10 +472,10 @@
                                     <div class="lead-contact">คุณวิภาดา (089-876-5432)</div>
                                 </td>
                                 <td>
-                                    <span class="req-highlight">📍 เชียงใหม่</span> <span class="req-highlight">👥 120 ท่าน</span>
-                                    <div style="font-size: 13px; color: #64748b; margin-top: 5px;">Company Outing งบจำกัด ขอเน้นอาหารเย็นแบบขันโตก</div>
+                                    <span class="req-highlight">📍 ฮ่องกง</span> <span class="req-highlight">👥 120 ท่าน</span>
+                                    <div style="font-size: 13px; color: #64748b; margin-top: 5px;">Company Outing งบจำกัด ขอเน้นเสริมมงคลองค์กร</div>
                                 </td>
-                                <td style="font-weight: 500; color: #0f172a;">฿4,500/ท่าน</td>
+                                <td style="font-weight: 500; color: #0f172a;">฿20,000/ท่าน</td>
                                 <td><span class="status-badge status-contacted">⏳ กำลังจัดทำราคา</span></td>
                                 <td class="action-links">
                                     <span class="action-icon" title="ดูรายละเอียด">👁️</span>
@@ -489,10 +492,10 @@
                                     <div class="lead-contact">นพ. ธนกฤต (082-111-2222)</div>
                                 </td>
                                 <td>
-                                    <span class="req-highlight">📍 กาญจนบุรี</span> <span class="req-highlight">👥 30 ท่าน</span>
-                                    <div style="font-size: 13px; color: #64748b; margin-top: 5px;">ทริปผู้บริหาร VIP พักแพส่วนตัว</div>
+                                    <span class="req-highlight">📍 ญี่ปุ่น</span> <span class="req-highlight">👥 30 ท่าน</span>
+                                    <div style="font-size: 13px; color: #64748b; margin-top: 5px;">ทริปผู้บริหาร VIP ดูงานเทคโนโลยีการแพทย์</div>
                                 </td>
-                                <td style="font-weight: 500; color: #0f172a;">฿8,000/ท่าน</td>
+                                <td style="font-weight: 500; color: #0f172a;">฿45,000/ท่าน</td>
                                 <td><span class="status-badge status-quoted">📄 ส่งใบเสนอราคาแล้ว</span></td>
                                 <td class="action-links">
                                     <span class="action-icon" title="ดูรายละเอียด">👁️</span>
@@ -536,14 +539,14 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <img src="https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=150" alt="Outing" style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px;">
+                                    <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=150" alt="Outing" style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px;">
                                 </td>
                                 <td>
-                                    <div class="pkg-name">ทริป Company Outing ประจำปี</div>
+                                    <div class="pkg-name">ทริป Incentive ประจำปี</div>
                                     <div class="pkg-meta">🏢 บริษัท เอบีซี เทคโนโลยี จำกัด</div>
                                 </td>
                                 <td>
-                                    <div style="font-size: 13px; color: #334155;">📍 ภูเก็ต</div>
+                                    <div style="font-size: 13px; color: #334155;">📍 ญี่ปุ่น</div>
                                     <div style="font-size: 12px; color: #64748b;">👥 150 ท่าน | 🗓️ 15 มิ.ย. 2026</div>
                                 </td>
                                 <td><span class="status-badge status-active">เผยแพร่</span></td>
@@ -554,15 +557,15 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <img src="https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?w=150" alt="Seminar" style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px;">
+                                    <img src="https://images.unsplash.com/photo-1522814147043-f16ce6166133?w=150" alt="Seminar" style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px;">
                                 </td>
                                 <td>
-                                    <div class="pkg-name">งานสัมมนาผู้บริหารระดับสูง VIP</div>
+                                    <div class="pkg-name">Executive Board Retreat</div>
                                     <div class="pkg-meta">🏢 บมจ. แสนดี เอ็นเตอร์ไพรส์</div>
                                 </td>
                                 <td>
-                                    <div style="font-size: 13px; color: #334155;">📍 เชียงใหม่</div>
-                                    <div style="font-size: 12px; color: #64748b;">👥 40 ท่าน | 🗓️ 20 พ.ค. 2026</div>
+                                    <div style="font-size: 13px; color: #334155;">📍 ปารีส, ฝรั่งเศส</div>
+                                    <div style="font-size: 12px; color: #64748b;">👥 20 ท่าน | 🗓️ 20 พ.ค. 2026</div>
                                 </td>
                                 <td><span class="status-badge status-active">เผยแพร่</span></td>
                                 <td class="action-links">
@@ -589,7 +592,7 @@
                         <div class="form-body form-grid">
                             <div class="form-group full-width">
                                 <label>ชื่องาน (Project Title) <span style="color:red;">*</span></label>
-                                <input type="text" placeholder="เช่น ทริป Company Outing ประจำปี">
+                                <input type="text" placeholder="เช่น ทริป Incentive ประจำปี">
                             </div>
                             <div class="form-group">
                                 <label>ชื่อองค์กรลูกค้า (Client Name)</label>
@@ -597,7 +600,7 @@
                             </div>
                             <div class="form-group">
                                 <label>ปลายทาง (Destination)</label>
-                                <input type="text" placeholder="เช่น ภูเก็ต หรือ ญี่ปุ่น">
+                                <input type="text" placeholder="เช่น ญี่ปุ่น หรือ ฝรั่งเศส">
                             </div>
                             <div class="form-group">
                                 <label>จำนวนผู้เดินทาง (Pax)</label>
@@ -611,9 +614,9 @@
                                 <label>เชื่อมโยงกับแพ็คเกจทัวร์ (Related Package) - เพื่อการทำ Upsell</label>
                                 <select>
                                     <option>-- ไม่ระบุ --</option>
-                                    <option>Phuket Exclusive Outing</option>
-                                    <option>Chiang Mai Seminar & Culture</option>
-                                    <option>Kanchanaburi Nature & CSR</option>
+                                    <option>Japan Executive & Innovation</option>
+                                    <option>Europe Premium Leadership</option>
+                                    <option>Hong Kong Team Building</option>
                                 </select>
                             </div>
                         </div>
@@ -624,7 +627,7 @@
                         <div class="form-body form-grid">
                             <div class="form-group full-width">
                                 <label>ข้อความรีวิว (Review Text)</label>
-                                <textarea rows="3" placeholder="ทีมงานดูแลดีมากครับ อาหารอร่อย กิจกรรมสนุก ประทับใจมาก..."></textarea>
+                                <textarea rows="3" placeholder="ทีมงานดูแลดีมากครับ การจัดการโรงแรมและสถานที่ดูงานยอดเยี่ยม ประทับใจมาก..."></textarea>
                             </div>
                             <div class="form-group">
                                 <label>ชื่อผู้รีวิว (Reviewer Name)</label>
@@ -677,8 +680,8 @@
                             <select class="search-input" style="width: 150px; min-width: 150px;">
                                 <option>หมวดหมู่ทั้งหมด</option>
                                 <option>ทริคการจัดงาน (Tips)</option>
-                                <option>รีวิวสถานที่ (Review)</option>
-                                <option>ข่าวสารองค์กร (News)</option>
+                                <option>เกร็ดความรู้ (Knowledge)</option>
+                                <option>ข่าวสารอุตสาหกรรม (News)</option>
                             </select>
                             <select class="search-input" style="width: 120px; min-width: 120px; margin-left: 10px;">
                                 <option>สถานะ</option>
@@ -700,15 +703,15 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=150" alt="Blog 1" style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px;">
+                                        <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=150" alt="Blog 1" style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px;">
                                     </td>
                                     <td>
-                                        <div class="pkg-name">5 ทริคจัด Company Outing ให้ได้ใจพนักงาน (และอยู่ในงบ)</div>
+                                        <div class="pkg-name">5 เช็กลิสต์สำคัญ ก่อนจัดทริป Corporate Outing ระดับพรีเมียม</div>
                                         <div class="pkg-meta">🏷️ ทริคการจัดงาน (Tips)</div>
                                     </td>
                                     <td>
                                         <div style="font-size: 13px; color: #334155;">👁️ 1,250 views</div>
-                                        <div style="font-size: 12px; color: #64748b;">🗓️ 01 ส.ค. 2026</div>
+                                        <div style="font-size: 12px; color: #64748b;">🗓️ 15 ส.ค. 2026</div>
                                     </td>
                                     <td><span class="status-badge status-active">เผยแพร่</span></td>
                                     <td class="action-links">
@@ -718,35 +721,17 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=150" alt="Blog 2" style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px;">
+                                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=150" alt="Blog 2" style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px;">
                                     </td>
                                     <td>
-                                        <div class="pkg-name">แนะนำ 10 โรงแรมจัดสัมมนาใกล้กรุงเทพฯ รองรับ 100+ ท่าน</div>
-                                        <div class="pkg-meta">🏷️ รีวิวสถานที่ (Review)</div>
+                                        <div class="pkg-name">สิทธิประโยชน์ทางภาษี: จัดสัมมนาและดูงานอย่างไรให้คุ้มค่าที่สุด</div>
+                                        <div class="pkg-meta">🏷️ เกร็ดความรู้ (Knowledge)</div>
                                     </td>
                                     <td>
                                         <div style="font-size: 13px; color: #334155;">👁️ 840 views</div>
-                                        <div style="font-size: 12px; color: #64748b;">🗓️ 28 ก.ค. 2026</div>
+                                        <div style="font-size: 12px; color: #64748b;">🗓️ 02 ส.ค. 2026</div>
                                     </td>
                                     <td><span class="status-badge status-active">เผยแพร่</span></td>
-                                    <td class="action-links">
-                                        <a href="#" onclick="switchTab('add-blog')">แก้ไข</a>
-                                        <a href="#" class="text-danger">ลบ</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div style="width: 80px; height: 60px; background-color: #e2e8f0; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 20px;">🖼️</div>
-                                    </td>
-                                    <td>
-                                        <div class="pkg-name">ขั้นตอนขออนุมัติงบ CSR ฉบับฝ่าย HR (อัปเดต 2026)</div>
-                                        <div class="pkg-meta">🏷️ ทริคการจัดงาน (Tips)</div>
-                                    </td>
-                                    <td>
-                                        <div style="font-size: 13px; color: #334155;">👁️ - views</div>
-                                        <div style="font-size: 12px; color: #64748b;">🗓️ -</div>
-                                    </td>
-                                    <td><span class="status-badge status-draft">ฉบับร่าง</span></td>
                                     <td class="action-links">
                                         <a href="#" onclick="switchTab('add-blog')">แก้ไข</a>
                                         <a href="#" class="text-danger">ลบ</a>
@@ -772,36 +757,35 @@
                             <div class="form-body form-grid">
                                 <div class="form-group full-width">
                                     <label>หัวข้อบทความ (Article Title) <span style="color:red;">*</span></label>
-                                    <input type="text" placeholder="เช่น 5 ทริคจัด Company Outing ให้ได้ใจพนักงาน">
+                                    <input type="text" placeholder="เช่น 5 เช็กลิสต์สำคัญ ก่อนจัดทริป Corporate Outing">
                                 </div>
                                 <div class="form-group">
                                     <label>หมวดหมู่ (Category)</label>
                                     <select>
                                         <option>ทริคการจัดงาน (Tips)</option>
-                                        <option>รีวิวสถานที่ (Review)</option>
-                                        <option>ข่าวสารองค์กร (News)</option>
+                                        <option>เกร็ดความรู้ (Knowledge)</option>
+                                        <option>ข่าวสารอุตสาหกรรม (News)</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>URL Slug (ภาษาอังกฤษ/ไทย ไม่มีเว้นวรรค)</label>
-                                    <input type="text" placeholder="เช่น 5-tips-for-company-outing">
+                                    <input type="text" placeholder="เช่น 5-tips-for-corporate-outing">
                                 </div>
                             </div>
                         </div>
     
-                        <!-- Card 2: เครื่องมือเขียนบทความ (Mockup Rich Text) -->
+                        <!-- Card 2: เครื่องมือเขียนบทความ -->
                         <div class="form-section">
                             <div class="form-header">📝 เนื้อหาบทความ (Content)</div>
                             <div class="form-body">
                                 <div class="form-group full-width">
-                                    <!-- Toolbar จำลอง -->
                                     <div style="display: flex; gap: 10px; padding: 10px; background-color: #f1f5f9; border: 1px solid #cbd5e1; border-bottom: none; border-radius: 8px 8px 0 0;">
                                         <span style="cursor: pointer; padding: 5px 10px; background: #fff; border-radius: 4px; border: 1px solid #e2e8f0;"><b>B</b></span>
                                         <span style="cursor: pointer; padding: 5px 10px; background: #fff; border-radius: 4px; border: 1px solid #e2e8f0;"><i>I</i></span>
                                         <span style="cursor: pointer; padding: 5px 10px; background: #fff; border-radius: 4px; border: 1px solid #e2e8f0;"><u>U</u></span>
                                         <span style="cursor: pointer; padding: 5px 10px; background: #fff; border-radius: 4px; border: 1px solid #e2e8f0;">🔗 Link</span>
                                         <span style="cursor: pointer; padding: 5px 10px; background: #fff; border-radius: 4px; border: 1px solid #e2e8f0;">🖼️ Image</span>
-                                        <select style="padding: 5px; border: 1px solid #e2e8f0; border-radius: 4px;"><option>Paragraph</option><option>Heading 2</option><option>Heading 3</option></select>
+                                        <select style="padding: 5px; border: 1px solid #e2e8f0; border-radius: 4px; font-family: 'Kanit';"><option>Paragraph</option><option>Heading 2</option><option>Heading 3</option></select>
                                     </div>
                                     <textarea rows="15" style="border-radius: 0 0 8px 8px; border-top: none; resize: vertical;" placeholder="เริ่มเขียนเนื้อหาบทความของคุณที่นี่..."></textarea>
                                 </div>
@@ -850,8 +834,8 @@
                     </form>
                 </section>
                 <!-- =========================================
-                 TAB 7: MESSAGES (กล่องข้อความ Inbox)
-                 ========================================= -->
+                     TAB 7: MESSAGES (กล่องข้อความ Inbox)
+                     ========================================= -->
             <section id="tab-messages" class="tab-content">
                 <div class="page-header-actions">
                     <h3 style="color:#0f172a;">💬 กล่องข้อความและการแจ้งเตือน (Inbox)</h3>
@@ -880,7 +864,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- แถวที่ 1: ข้อความใหม่ (ยังไม่อ่าน) จะทำพื้นหลังสีเทาอ่อนให้เด่นขึ้น -->
+                            <!-- แถวที่ 1: ข้อความใหม่ (ยังไม่อ่าน) -->
                             <tr style="background-color: #f1f5f9;">
                                 <td>
                                     <div class="lead-date" style="color: #0f172a; font-weight: 600;">วันนี้</div>
@@ -897,7 +881,7 @@
                                 </td>
                                 <td><span style="font-size: 11px; background: #e0e7ff; color: #4338ca; padding: 4px 8px; border-radius: 4px; font-weight: 600;">Website Form</span></td>
                                 <td class="action-links">
-                                    <a href="#" onclick="switchTab('view-message')" style="background: var(--admin-secondary); color: #fff; padding: 6px 12px; border-radius: 6px; text-decoration: none;">เปิดอ่าน</a>
+                                    <a href="#" onclick="switchTab('view-message')" style="background: var(--admin-primary); color: #fff; padding: 6px 12px; border-radius: 6px; text-decoration: none; transition: 0.3s;">เปิดอ่าน</a>
                                 </td>
                             </tr>
                             <!-- แถวที่ 2: ข้อความที่อ่านแล้ว -->
@@ -911,8 +895,8 @@
                                     <div class="lead-contact">siriporn.hr@company.co.th</div>
                                 </td>
                                 <td>
-                                    <div style="font-size: 14px; color: #334155; margin-bottom: 3px;">✅ ขอทราบรายละเอียดแพ็คเกจภูเก็ตเพิ่มเติม</div>
-                                    <div style="font-size: 13px; color: #94a3b8;">อยากทราบว่าถ้าเพิ่มวันเดินทางเป็น 4 วัน 3 คืน สำหรับ 80 ท่าน ราคาจะอยู่ที่ประมาณเท่าไหร่คะ...</div>
+                                    <div style="font-size: 14px; color: #334155; margin-bottom: 3px;">✅ ขอทราบรายละเอียดแพ็คเกจญี่ปุ่นเพิ่มเติม</div>
+                                    <div style="font-size: 13px; color: #94a3b8;">อยากทราบว่าถ้าเปลี่ยนกิจกรรมในดูงานนวัตกรรม เป็นวันพักผ่อนฟรีสไตล์ สำหรับ 80 ท่าน ราคาจะอยู่ที่ประมาณเท่าไหร่คะ...</div>
                                 </td>
                                 <td><span style="font-size: 11px; background: #dcfce7; color: #15803d; padding: 4px 8px; border-radius: 4px; font-weight: 600;">LINE OA</span></td>
                                 <td class="action-links">
@@ -929,7 +913,7 @@
                  ========================================= -->
             <section id="tab-view-message" class="tab-content">
                 <div style="margin-bottom: 20px;">
-                    <a href="#" onclick="switchTab('messages')" style="text-decoration: none; color: #64748b; font-size: 14px; display: inline-block; margin-bottom: 10px;">&larr; ย้อนกลับไปหน้า Inbox</a>
+                    <a href="#" onclick="switchTab('messages')" style="text-decoration: none; color: #64748b; font-size: 14px; display: inline-block; margin-bottom: 10px; transition: 0.2s;">&larr; ย้อนกลับไปหน้า Inbox</a>
                     <h3 style="color:#0f172a;">รายละเอียดข้อความ (Message Details)</h3>
                 </div>
 
@@ -958,7 +942,7 @@
                 <div class="card-box">
                     <h4 style="font-size: 15px; color: #0f172a; margin-bottom: 15px;">↩️ ตอบกลับข้อความ (Reply via Email)</h4>
                     <div style="display: flex; flex-direction: column; gap: 10px;">
-                        <textarea rows="6" placeholder="พิมพ์ข้อความตอบกลับที่นี่... (ระบบจะทำการส่งอีเมลตอบกลับไปยัง wichai@example.com อัตโนมัติ)" style="width: 100%; padding: 15px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; font-family: 'Kanit', sans-serif; font-size: 14px; resize: vertical;"></textarea>
+                        <textarea rows="6" placeholder="พิมพ์ข้อความตอบกลับที่นี่... (ระบบจะทำการส่งอีเมลตอบกลับไปยัง wichai@example.com อัตโนมัติ)" style="width: 100%; padding: 15px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; font-family: 'Kanit', sans-serif; font-size: 14px; resize: vertical; transition: 0.3s;"></textarea>
                         
                         <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
                             <button class="btn-cancel" onclick="switchTab('messages')">ยกเลิก</button>
@@ -981,15 +965,15 @@
             const targetTab = document.getElementById('tab-' + tabId);
             if(targetTab) targetTab.classList.add('active');
 
-            // เอาไฮไลท์สีฟ้าออกจากเมนูทุกอัน
+            // เอาไฮไลท์ออกจากเมนูทุกอัน
             document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
             
-// ใส่ไฮไลท์ให้เมนูที่เกี่ยวข้อง
-let activeMenuId = 'menu-' + tabId;
+            // ใส่ไฮไลท์ให้เมนูที่เกี่ยวข้อง
+            let activeMenuId = 'menu-' + tabId;
             if (tabId === 'add-package') activeMenuId = 'menu-packages';
             if (tabId === 'add-portfolio') activeMenuId = 'menu-portfolio';
             if (tabId === 'add-blog') activeMenuId = 'menu-blog';
-            if (tabId === 'view-message') activeMenuId = 'menu-messages'; // บรรทัดที่เพิ่มใหม่
+            if (tabId === 'view-message') activeMenuId = 'menu-messages';
             
             const activeMenu = document.getElementById(activeMenuId);
             if (activeMenu) activeMenu.classList.add('active');
@@ -1005,12 +989,12 @@ let activeMenuId = 'menu-' + tabId;
                 'blog': 'จัดการบทความ (Blog)',
                 'add-blog': 'เขียนบทความใหม่ (Write a New Post)',
                 'messages': 'แจ้งเตือนข้อความ (Inbox)',
-                'view-message': 'รายละเอียดข้อความ (Message Details)' // บรรทัดที่เพิ่มใหม่
+                'view-message': 'รายละเอียดข้อความ (Message Details)'
             };
             document.getElementById('pageTitle').innerText = titles[tabId] || 'ระบบหลังบ้าน';
         }
 
-        // Render กราฟ SalesChart
+        // Render กราฟ SalesChart ด้วยสี Navy ของแบรนด์ Guess Craft
         const ctx = document.getElementById('salesChart').getContext('2d');
         new Chart(ctx, {
             type: 'bar',
@@ -1019,7 +1003,7 @@ let activeMenuId = 'menu-' + tabId;
                 datasets: [{
                     label: 'ยอดขาย (ล้านบาท)',
                     data: [0.8, 1.2, 0.9, 1.5, 1.1, 1.8],
-                    backgroundColor: '#3b82f6',
+                    backgroundColor: '#0f172a', /* ปรับเป็นสี Midnight Navy */
                     borderRadius: 6
                 }]
             },

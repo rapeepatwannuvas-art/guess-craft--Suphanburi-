@@ -1,0 +1,1251 @@
+/* =========================================
+   1. Base & Variables (ตัวแปรสีและฟอนต์หลัก)
+   ========================================= */
+   :root {
+    --primary-blue: #1e3a8a;    /* สีน้ำเงินหลัก สื่อถึงความน่าเชื่อถือ */
+    --secondary-blue: #3b82f6;  /* สีน้ำเงินสว่าง สำหรับจุดเด่น */
+    --dark-text: #111827;       /* สีตัวอักษรหลัก (ดำอมเทา) */
+    --gray-text: #64748b;       /* สีตัวอักษรรอง */
+    --bg-light: #f8fafc;        /* สีพื้นหลังเว็บไซต์ */
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Kanit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--dark-text);
+    line-height: 1.6;
+}
+
+/* =========================================
+   2. Navigation Bar (แถบเมนูด้านบน)
+   ========================================= */
+.navbar {
+    background-color: var(--white);
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    
+    /* ทำให้เมนูติดอยู่ด้านบนเสมอเวลาเลื่อนจอ */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* การจัดวางโลโก้ */
+.logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+.logo-text {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--primary-blue);
+}
+.logo-subtext {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--gray-text);
+}
+
+/* การจัดวางลิงก์เมนูตรงกลาง */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 35px;
+}
+.nav-links li a {
+    text-decoration: none;
+    color: var(--dark-text);
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding-bottom: 5px;
+}
+
+/* เอฟเฟกต์เวลาเอาเมาส์ชี้ */
+.nav-links li a:hover {
+    color: var(--primary-blue);
+}
+
+/* เส้นใต้บอกว่ากำลังอยู่หน้าไหน (Active State) */
+.nav-links li a.active {
+    color: var(--primary-blue);
+    border-bottom: 2px solid var(--primary-blue);
+}
+
+/* =========================================
+   3. Buttons (ปุ่มกดต่างๆ)
+   ========================================= */
+.btn-primary {
+    background-color: #0f172a; /* สีเทาดำเข้ม ดูแพงและตัดกับพื้นขาว */
+    color: var(--white);
+    padding: 10px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.btn-primary:hover {
+    background-color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   4. Main Content (พื้นที่แสดงเนื้อหา)
+   ========================================= */
+main {
+    padding: 80px 20px;
+    text-align: center;
+}
+main h1 {
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+}
+/* =========================================
+   5. Hero Section (แบนเนอร์หลัก)
+   ========================================= */
+   .hero-section {
+    /* ใช้สี Gradient ให้ดูมีมิติ / อนาคตสามารถเปลี่ยนเป็นรูปพื้นหลังได้ */
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #312e81 100%);
+    color: var(--white);
+    padding: 100px 20px;
+    text-align: center;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.hero-content {
+    max-width: 800px;
+    width: 100%;
+}
+.hero-subtitle {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #93c5fd;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+.hero-title {
+    font-size: 42px;
+    margin-bottom: 20px;
+    color: var(--white);
+}
+.hero-desc {
+    font-size: 16px;
+    color: #e2e8f0;
+    margin-bottom: 40px;
+}
+
+/* =========================================
+   6. Search Box (กล่องค้นหา)
+   ========================================= */
+.search-box {
+    background-color: var(--white);
+    padding: 8px;
+    border-radius: 50px;
+    display: flex;
+    gap: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+.search-input {
+    flex: 1.5;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 50px;
+    outline: none;
+    font-size: 15px;
+    color: var(--dark-text);
+}
+.search-select {
+    flex: 1;
+    border: none;
+    border-left: 1px solid #e2e8f0;
+    padding: 15px 20px;
+    outline: none;
+    font-size: 15px;
+    color: var(--gray-text);
+    background-color: transparent;
+    cursor: pointer;
+}
+.btn-search {
+    background-color: var(--secondary-blue);
+    color: var(--white);
+    border: none;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.btn-search:hover {
+    background-color: #2563eb;
+    transform: scale(1.02);
+}
+
+/* =========================================
+   7. Responsive (รองรับหน้าจอมือถือ)
+   ========================================= */
+@media (max-width: 768px) {
+    .search-box {
+        flex-direction: column;
+        border-radius: 16px;
+        padding: 15px;
+    }
+    .search-select {
+        border-left: none;
+        border-top: 1px solid #e2e8f0;
+    }
+    .btn-search {
+        border-radius: 8px;
+        margin-top: 5px;
+    }
+}
+/* =========================================
+   8. Navbar Responsive (เมนูมือถือ)
+   ========================================= */
+   .hamburger {
+    display: none; /* ซ่อนปุ่มนี้ไว้เมื่อเปิดบนจอคอมพิวเตอร์ */
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--primary-blue);
+    user-select: none;
+}
+
+/* คำสั่งทำงานเฉพาะหน้าจอที่เล็กกว่า 768px (แท็บเล็ตและมือถือ) */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px;
+    }
+    
+    .hamburger {
+        display: block; /* แสดงปุ่ม ☰ บนมือถือ */
+    }
+    
+    /* ซ่อนปุ่ม "ขอใบเสนอราคาฟรี" บน Navbar มือถือเพื่อประหยัดพื้นที่ */
+    .navbar .btn-primary {
+        display: none; 
+    }
+    
+    /* แปลงร่างเมนูจากแนวนอนเป็นแนวตั้ง Dropdown */
+    .nav-links {
+        display: none; /* ซ่อนเมนูไว้ก่อน */
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        padding: 20px 0;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        text-align: center;
+        gap: 20px;
+    }
+    
+    /* เมื่อมีคลาส .active (เกิดจากการกดปุ่ม ☰) ให้แสดงเมนู */
+    .nav-links.active {
+        display: flex;
+    }
+}
+/* =========================================
+   9. Core Services Section (บริการของเรา)
+   ========================================= */
+   .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.services-section {
+    padding: 80px 0;
+    background-color: var(--bg-light);
+}
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+}
+.section-subtitle {
+    text-align: center;
+    color: var(--gray-text);
+    margin-bottom: 50px;
+    font-size: 16px;
+}
+.services-grid {
+    display: grid;
+    /* จัด 4 คอลัมน์ ถ้าจอเล็กจะหดเหลือ 2 หรือ 1 อัตโนมัติ */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+.service-card {
+    background-color: var(--white);
+    padding: 30px 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border-top: 4px solid transparent;
+    transition: all 0.3s ease;
+}
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+    border-top: 4px solid var(--secondary-blue);
+}
+.service-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+.service-title {
+    font-size: 20px;
+    color: var(--dark-text);
+    margin-bottom: 15px;
+}
+.service-desc {
+    font-size: 14px;
+    color: var(--gray-text);
+    line-height: 1.6;
+}
+/* =========================================
+   10. CTA Section (แถบกระตุ้นการตัดสินใจ)
+   ========================================= */
+.cta-section {
+    background-color: #0b1120; /* สีกรมท่าเข้มมากๆ */
+    padding: 60px 0;
+    border-bottom: 1px solid #1e293b;
+}
+.cta-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.cta-text h2 {
+    color: var(--white);
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+.cta-text p {
+    color: #94a3b8;
+    font-size: 15px;
+}
+.btn-cta {
+    background-color: #4f46e5;
+    color: var(--white);
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+.btn-cta:hover {
+    background-color: #4338ca;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+}
+
+/* =========================================
+   11. Dark Premium Footer
+   ========================================= */
+.footer-dark {
+    background-color: #0b1120;
+    color: var(--white);
+    padding: 60px 0 0 0;
+    font-size: 14px;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+.brand-desc {
+    color: #94a3b8;
+    margin: 20px 0;
+    line-height: 1.6;
+}
+.license-box {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    display: inline-block;
+}
+.license-title {
+    color: #64748b;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+.license-no {
+    color: var(--white);
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.footer-col h3 {
+    color: var(--white);
+    font-size: 16px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+.footer-col ul {
+    list-style: none;
+}
+.footer-col ul li {
+    margin-bottom: 15px;
+}
+.footer-col ul li a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.footer-col ul li a:hover {
+    color: var(--secondary-blue);
+}
+
+/* ติดต่อทีมงาน (คอลัมน์ 4) */
+.footer-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.footer-contact-item .icon {
+    background-color: rgba(255, 255, 255, 0.05);
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 14px;
+}
+.footer-contact-item .label {
+    color: #64748b;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+.footer-contact-item .value {
+    color: var(--white);
+    font-weight: 600;
+    font-size: 15px;
+}
+
+/* แถบล่างสุด (Copyright) */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 0;
+}
+.bottom-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #64748b;
+    font-size: 13px;
+}
+.bottom-flex a {
+    color: #64748b;
+    text-decoration: none;
+}
+.bottom-flex a:hover {
+    color: var(--white);
+}
+
+/* Responsive สำหรับมือถือ */
+@media (max-width: 992px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (max-width: 768px) {
+    .cta-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+    .bottom-flex {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+/* =========================================
+   12. Page Header (หัวเพจย่อย)
+   ========================================= */
+   .page-header {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #312e81 100%);
+    color: var(--white);
+    padding: 60px 20px;
+    text-align: center;
+}
+.page-header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: var(--white);
+}
+
+/* =========================================
+   13. Contact Page & Form
+   ========================================= */
+.contact-page-section {
+    padding: 80px 0;
+    background-color: var(--white);
+}
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+}
+.contact-info {
+    background-color: var(--bg-light);
+    padding: 40px;
+    border-radius: 16px;
+    border-top: 5px solid var(--primary-blue);
+}
+.contact-info h3 {
+    color: var(--primary-blue);
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.contact-desc {
+    color: var(--gray-text);
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+.team-member {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--white);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+.team-avatar {
+    width: 45px;
+    height: 45px;
+    background: var(--primary-blue);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+.team-details h4 { color: var(--dark-text); margin: 0; }
+.team-details p { color: var(--gray-text); font-size: 13px; margin: 0; }
+
+.contact-hotline {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+.contact-hotline p { font-weight: 600; color: var(--dark-text); margin-bottom: 5px; }
+.contact-hotline h4 { color: var(--primary-blue); font-size: 22px; }
+
+/* ปุ่มแอดไลน์ และ ปุ่มเลื่อนลงฟอร์ม */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 30px;
+}
+.btn-line {
+    background-color: #00B900; /* สีแบรนด์ LINE */
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.3s;
+}
+.btn-line:hover {
+    background-color: #009900;
+}
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary-blue);
+    border: 2px solid var(--primary-blue);
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.3s;
+}
+.btn-outline:hover {
+    background-color: var(--primary-blue);
+    color: var(--white);
+}
+
+/* ฟอร์ม */
+.quote-form-container { padding: 20px 0; }
+.quote-form-container h3 { font-size: 24px; color: var(--dark-text); }
+.form-desc { color: var(--gray-text); font-size: 14px; margin-bottom: 25px; }
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group.full-width { grid-column: span 2; }
+.form-group label { font-size: 14px; font-weight: 500; }
+.form-group input, .form-group textarea {
+    padding: 12px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+.form-group input:focus, .form-group textarea:focus { border-color: var(--secondary-blue); }
+.btn-submit {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-submit:hover { background-color: #0f172a; }
+.privacy-note { text-align: center; color: #94a3b8; font-size: 12px; margin-top: 15px; }
+
+@media (max-width: 768px) {
+    .contact-container { grid-template-columns: 1fr; }
+    .form-group.full-width { grid-column: span 1; }
+    .form-grid { grid-template-columns: 1fr; }
+}
+/* =========================================
+   14. Portfolio Section (แกลเลอรีผลงาน)
+   ========================================= */
+   .portfolio-section {
+    padding: 60px 0 80px 0;
+    background-color: var(--bg-light);
+}
+.portfolio-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+.filter-btn {
+    background-color: var(--white);
+    border: 1px solid #cbd5e1;
+    color: var(--gray-text);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.filter-btn:hover, .filter-btn.active {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    border-color: var(--primary-blue);
+}
+
+/* จัดการ Grid รูปภาพ */
+.portfolio-grid {
+    display: grid;
+    /* แถวละ 3 รูป ถ้าจอเล็กจะหดเหลือ 2 หรือ 1 อัตโนมัติ */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+.portfolio-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 250px; /* บังคับความสูงของทุกกล่องให้เท่ากัน */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    cursor: pointer;
+}
+.portfolio-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ตัดรูปภาพให้เต็มกล่องแบบไม่เสียสัดส่วน */
+    transition: transform 0.5s ease;
+}
+.portfolio-item:hover .portfolio-img {
+    transform: scale(1.1); /* ขยายรูปเวลาเมาส์ชี้ */
+}
+
+/* กล่องข้อความสีดำโปร่งแสงที่ซ้อนทับบนรูป */
+.portfolio-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0) 100%);
+    padding: 30px 20px 20px 20px;
+    color: var(--white);
+    transform: translateY(10px);
+    transition: transform 0.3s ease;
+}
+.portfolio-item:hover .portfolio-overlay {
+    transform: translateY(0);
+}
+.portfolio-overlay h4 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+}
+.portfolio-overlay p {
+    margin: 0;
+    font-size: 13px;
+    color: #cbd5e1;
+}
+/* =========================================
+   15. Portfolio Tags (ป้ายกำกับบนรูปผลงาน)
+   ========================================= */
+   .portfolio-tags {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    gap: 8px;
+    z-index: 2; /* ให้อยู่เหนือรูปภาพ */
+}
+.tag {
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--white);
+    /* ใส่เอฟเฟกต์กระจกเบลอ (Glassmorphism) ให้ดูแพง */
+    background-color: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+/* แยกสี Tag ตามประเภทให้ดูมีมิติมากขึ้น */
+.tag-region {
+    background-color: rgba(30, 58, 138, 0.85); /* สีน้ำเงินหลักของเรา */
+}
+.tag-pax {
+    background-color: rgba(16, 185, 129, 0.85); /* สีเขียว */
+}
+/* =========================================
+   16. Corporate Page Styles
+   ========================================= */
+   .corporate-header {
+    /* เปลี่ยนภาพพื้นหลังให้ดูเป็น Corporate มากขึ้น */
+    background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1556761175-5973dc0f32d7?w=1600') center/cover;
+}
+
+/* Why Choose Us Section */
+.why-us-section {
+    padding: -40px 0 60px 0;
+    margin-top: -50px; /* ดึงกล่องให้ซ้อนทับกับ Header นิดนึงให้ดูมีมิติ */
+    position: relative;
+    z-index: 10;
+}
+.why-us-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+.why-card {
+    background-color: var(--white);
+    padding: 40px 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+}
+.why-card:hover {
+    transform: translateY(-5px);
+}
+.why-icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+.why-card h3 {
+    color: var(--primary-blue);
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.why-card p {
+    color: var(--gray-text);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Detailed Services Section (สลับซ้าย-ขวา) */
+.detailed-services {
+    padding: 60px 0;
+    background-color: var(--bg-light);
+}
+.service-row {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-top: 60px;
+}
+.service-row.reverse {
+    flex-direction: row-reverse;
+}
+.service-image {
+    flex: 1;
+}
+.service-image img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+.service-text {
+    flex: 1;
+}
+.service-badge {
+    display: inline-block;
+    background-color: #eff6ff;
+    color: var(--secondary-blue);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.service-text h3 {
+    font-size: 28px;
+    color: var(--dark-text);
+    margin-bottom: 15px;
+}
+.service-text p {
+    color: var(--gray-text);
+    margin-bottom: 25px;
+    font-size: 15px;
+}
+.service-text ul {
+    list-style: none;
+}
+.service-text ul li {
+    margin-bottom: 12px;
+    color: var(--dark-text);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Work Process Section */
+.process-section {
+    padding: 80px 0;
+    background-color: var(--white);
+}
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+    text-align: center;
+}
+.process-step {
+    position: relative;
+}
+.step-number {
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-blue);
+    color: var(--white);
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin: 0 auto 20px auto;
+    box-shadow: 0 10px 20px rgba(30, 58, 138, 0.2);
+}
+.process-step h4 {
+    color: var(--dark-text);
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.process-step p {
+    color: var(--gray-text);
+    font-size: 14px;
+}
+
+/* Responsive สำหรับหน้า Corporate */
+@media (max-width: 992px) {
+    .service-row, .service-row.reverse {
+        flex-direction: column;
+        gap: 30px;
+    }
+}
+/* =========================================
+   17. Packages Page (แคตตาล็อกทัวร์)
+   ========================================= */
+   .packages-section {
+    padding: 60px 0 80px 0;
+    background-color: var(--bg-light);
+}
+
+/* แถบ Filter */
+.filter-bar {
+    background-color: var(--white);
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+}
+.filter-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.filter-group {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+}
+.filter-group label {
+    font-size: 13px;
+    color: var(--gray-text);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+.filter-group select {
+    padding: 12px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: 'Kanit', sans-serif;
+    color: var(--dark-text);
+    outline: none;
+    cursor: pointer;
+    background-color: var(--white);
+}
+.btn-filter {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    height: 47px; /* ให้สูงเท่ากับช่อง Select */
+    transition: 0.3s;
+}
+.btn-filter:hover {
+    background-color: #0f172a;
+}
+
+/* =========================================
+   แคตตาล็อกแพ็คเกจทัวร์ (ฉบับปรับขนาดกะทัดรัด)
+   ========================================= */
+   .tour-catalog-grid {
+    display: grid;
+    /* บังคับให้จัดเรียง 3-4 คอลัมน์ โดยย่อขนาดขั้นต่ำลงเหลือ 270px */
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 20px; /* ลดช่องว่างระหว่างการ์ด */
+}
+.package-card {
+    background-color: var(--white);
+    border-radius: 10px; /* ลดความมนลงนิดนึง */
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 1px solid #f1f5f9;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+.package-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+}
+.package-img-wrapper {
+    position: relative;
+    height: 180px; /* ย่อความสูงของรูปภาพลง จากเดิม 220px */
+}
+.package-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.package-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: #ef4444;
+    color: var(--white);
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 11px; /* ลดขนาดป้าย */
+    font-weight: 600;
+    z-index: 2;
+}
+.package-content {
+    padding: 15px; /* ลดขอบพื้นที่ว่างด้านในให้กระชับขึ้น */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.package-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px; /* ลดขนาดฟอนต์ */
+    color: var(--secondary-blue);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+.package-title {
+    font-size: 16px; /* ลดขนาดชื่อแพ็คเกจ */
+    color: var(--dark-text);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+.package-highlights {
+    list-style: none;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+.package-highlights li {
+    font-size: 13px; /* ลดขนาดฟอนต์รายละเอียด */
+    color: var(--gray-text);
+    margin-bottom: 6px;
+    position: relative;
+    padding-left: 12px;
+}
+.package-highlights li::before {
+    content: "•";
+    color: var(--primary-blue);
+    position: absolute;
+    left: 0;
+    font-size: 16px;
+    line-height: 14px;
+}
+.package-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 15px;
+    border-top: 1px solid #e2e8f0;
+}
+.price-box {
+    display: flex;
+    flex-direction: column;
+}
+.price-label {
+    font-size: 11px;
+    color: #94a3b8;
+}
+.price-value {
+    font-size: 18px; /* ลดขนาดฟอนต์ราคา */
+    font-weight: 600;
+    color: #0f172a;
+}
+.btn-detail {
+    background-color: var(--white);
+    color: var(--primary-blue);
+    border: 1px solid var(--primary-blue);
+    padding: 6px 12px; /* ย่อปุ่มให้เล็กลง */
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.package-card:hover .btn-detail {
+    background-color: var(--primary-blue);
+    color: var(--white);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .filter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .btn-filter {
+        margin-top: 10px;
+    }
+}
+/* =========================================
+   18. Articles Page (หน้าบทความ)
+   ========================================= */
+   .articles-section {
+    padding: 60px 0 80px 0;
+    background-color: var(--bg-light);
+}
+
+.article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+}
+.article-card {
+    background-color: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+.article-img-wrapper {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+.article-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.article-card:hover .article-img-wrapper img {
+    transform: scale(1.05);
+}
+
+/* ป้าย Tag บทความ */
+.article-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: var(--white);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 2;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.badge-tips { background-color: #3b82f6; }      /* สีน้ำเงินสว่าง */
+.badge-knowledge { background-color: #10b981; } /* สีเขียว */
+.badge-news { background-color: #f59e0b; }      /* สีส้ม */
+
+.article-content {
+    padding: 25px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.article-meta {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-bottom: 10px;
+}
+.article-title {
+    font-size: 18px;
+    color: var(--dark-text);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+.article-excerpt {
+    color: var(--gray-text);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+.btn-read-more {
+    color: var(--primary-blue);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s;
+}
+.btn-read-more:hover {
+    color: var(--secondary-blue);
+    transform: translateX(5px);
+}
+/* =========================================
+   19. Animations
+   ========================================= */
+   @keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: scale(0.95); 
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1); 
+    }
+}
+.fade-in {
+    animation: fadeIn 0.4s ease forwards;
+}
+/* =========================================
+   20. 404 Error Page
+   ========================================= */
+   .error-page-section {
+    min-height: 70vh; /* ให้กล่องมีความสูงกินพื้นที่หน้าจอ 70% */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-light);
+    text-align: center;
+    padding: 60px 20px;
+}
+.error-content h1 {
+    font-size: 150px;
+    color: var(--primary-blue);
+    line-height: 1;
+    margin-bottom: 10px;
+    /* ใส่เงาตัวอักษรให้ดูมีมิติเหมือนงาน Design ล้ำๆ */
+    text-shadow: 6px 6px 0px rgba(59, 130, 246, 0.15);
+}
+.error-content h2 {
+    font-size: 28px;
+    color: var(--dark-text);
+    margin-bottom: 20px;
+}
+.error-content p {
+    color: var(--gray-text);
+    max-width: 550px;
+    margin: 0 auto 40px auto;
+    font-size: 16px;
+    line-height: 1.6;
+}
+.error-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Responsive สำหรับหน้า 404 มือถือ */
+@media (max-width: 768px) {
+    .error-content h1 {
+        font-size: 100px;
+    }
+    .error-content h2 {
+        font-size: 22px;
+    }
+}

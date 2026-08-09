@@ -1010,5 +1010,30 @@
             options: { responsive: true, plugins: { legend: { display: false } } }
         });
     </script>
+    <!-- ใส่ยามเฝ้าประตูด้วย Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://vgixtsurzyrxybysgazc.supabase.co/rest/v1/';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZnaXh0c3VyenlyeHlieXNnYXpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYyNDczNDEsImV4cCI6MjEwMTgyMzM0MX0.0w267jpzh4ABrRDUwAwtjFU9fEyrTtkLwFvqoSKFuqI';
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // ตรวจสอบว่ามีคน Login อยู่หรือไม่
+        async function checkSession() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                // ถ้าไม่มีคน Login ให้เตะกลับไปหน้า login.html ทันที
+                window.location.replace('login.html');
+            }
+        }
+        
+        checkSession(); // สั่งให้ทำงานทันทีที่เปิดหน้าเว็บ
+
+        // อัปเดตปุ่ม Logout ให้ทำงานได้จริง
+        document.querySelector('.btn-logout').addEventListener('click', async (e) => {
+            e.preventDefault();
+            await supabase.auth.signOut();
+            window.location.replace('login.html');
+        });
+    </script>
 </body>
 </html>

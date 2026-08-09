@@ -98,15 +98,11 @@
     </div>
 
     <script>
-        // ==========================================
-        // ตั้งค่า Supabase (เดี๋ยวเราเอา API Key มาใส่ตรงนี้)
-        // ==========================================
         const SUPABASE_URL = 'https://vgixtsurzyrxybysgazc.supabase.co'; 
-// (สังเกตว่าจบแค่นี้ ไม่มี /rest/v1/ ตามหลังครับ)
-
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZnaXh0c3VyenlyeHlieXNnYXpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYyNDczNDEsImV4cCI6MjEwMTgyMzM0MX0.0w267jpzh4ABrRDUwAwtjFU9fEyrTtkLwFvqoSKFuqI';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZnaXh0c3VyenlyeHlieXNnYXpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYyNDczNDEsImV4cCI6MjEwMTgyMzM0MX0.0w267jpzh4ABrRDUwAwtjFU9fEyrTtkLwFvqoSKFuqI';
         
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // แก้ชื่อเป็น supabaseClient
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // จัดการเมื่อกดปุ่มเข้าสู่ระบบ
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
@@ -123,7 +119,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
             errorMessage.style.display = 'none';
 
             // ยิงข้อมูลไปถาม Supabase
-            const { data, error } = await supabase.auth.signInWithPassword({
+            const { data, error } = await supabaseClient.auth.signInWithPassword({
                 email: email,
                 password: password,
             });

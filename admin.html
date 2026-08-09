@@ -1013,8 +1013,10 @@
     <!-- ใส่ยามเฝ้าประตูด้วย Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        const SUPABASE_URL = 'https://vgixtsurzyrxybysgazc.supabase.co/rest/v1/';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZnaXh0c3VyenlyeHlieXNnYXpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYyNDczNDEsImV4cCI6MjEwMTgyMzM0MX0.0w267jpzh4ABrRDUwAwtjFU9fEyrTtkLwFvqoSKFuqI';
+const SUPABASE_URL = 'https://vgixtsurzyrxybysgazc.supabase.co'; 
+// (สังเกตว่าจบแค่นี้ ไม่มี /rest/v1/ ตามหลังครับ)
+
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZnaXh0c3VyenlyeHlieXNnYXpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYyNDczNDEsImV4cCI6MjEwMTgyMzM0MX0.0w267jpzh4ABrRDUwAwtjFU9fEyrTtkLwFvqoSKFuqI';
         const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // ตรวจสอบว่ามีคน Login อยู่หรือไม่
